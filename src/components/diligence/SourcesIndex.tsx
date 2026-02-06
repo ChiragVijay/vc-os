@@ -76,7 +76,7 @@ export const SourcesIndex = ({ sources }: SourcesIndexProps) => {
         <div className="pt-6 space-y-4">
           {sources.map((source) => (
             <div key={source.id} className="flex items-start gap-4 group">
-              <span className="text-[10px] font-mono text-vc-secondary w-6 shrink-0 pt-0.5">
+              <span className="text-[11px] font-mono text-vc-secondary w-6 shrink-0 pt-0.5">
                 [{source.ordinal}]
               </span>
 
@@ -85,7 +85,7 @@ export const SourcesIndex = ({ sources }: SourcesIndexProps) => {
                   <span className="text-[9px] font-mono uppercase tracking-[0.1em] text-vc-secondary px-1.5 py-0.5 bg-vc-hover border border-vc-border">
                     {getTypeLabel(source.type)}
                   </span>
-                  <span className="text-[10px] text-vc-secondary truncate">
+                  <span className="text-[11px] text-vc-secondary truncate">
                     {getDomain(source.url)}
                   </span>
                 </div>

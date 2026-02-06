@@ -77,7 +77,7 @@ export const InlineCitation = ({ ordinal, source }: InlineCitationProps) => {
         onClick={() => setIsOpen(!isOpen)}
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
-        className="inline-flex items-center justify-center text-[10px] font-mono text-vc-secondary hover:text-vc-primary transition-colors cursor-pointer ml-0.5 align-super"
+        className="inline-flex items-center justify-center text-[11px] font-mono text-vc-secondary hover:text-vc-primary transition-colors cursor-pointer ml-0.5 align-super"
         aria-describedby={`citation-${ordinal}`}
       >
         [{ordinal}]
@@ -107,7 +107,7 @@ export const InlineCitation = ({ ordinal, source }: InlineCitationProps) => {
               <span className="text-[9px] font-mono uppercase tracking-[0.15em] text-vc-secondary px-1.5 py-0.5 bg-vc-hover border border-vc-border">
                 {getTypeLabel(source.type)}
               </span>
-              <span className="text-[10px] font-mono text-vc-secondary">[{ordinal}]</span>
+              <span className="text-[11px] font-mono text-vc-secondary">[{ordinal}]</span>
             </div>
 
             <a
@@ -119,7 +119,7 @@ export const InlineCitation = ({ ordinal, source }: InlineCitationProps) => {
               {source.title || getDomain(source.url)}
             </a>
 
-            <div className="text-[11px] text-vc-secondary truncate">{getDomain(source.url)}</div>
+            <div className="text-xs text-vc-secondary truncate">{getDomain(source.url)}</div>
 
             {source.snippet && (
               <div className="mt-2 text-xs text-vc-tertiary leading-relaxed line-clamp-3 border-t border-vc-border pt-2">

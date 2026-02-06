@@ -190,7 +190,7 @@ export const DiligenceInput = () => {
             className="w-full border border-vc-border bg-white px-4 py-3 text-sm text-vc-primary placeholder:text-vc-secondary focus:outline-none focus:ring-2 focus:ring-accent/40"
             disabled={status === "processing"}
           />
-          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono text-vc-secondary">
+          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[11px] font-mono text-vc-secondary">
             URL
           </span>
         </div>
@@ -203,7 +203,7 @@ export const DiligenceInput = () => {
         </button>
       </form>
 
-      <div className="flex flex-wrap gap-3 text-[11px] uppercase font-mono tracking-[0.2em] text-vc-secondary mt-4">
+      <div className="flex flex-wrap gap-3 text-xs uppercase font-mono tracking-[0.2em] text-vc-secondary mt-4">
         <span>Reddit</span>
         <span>Hacker News</span>
         <span>Tavily</span>
@@ -212,7 +212,7 @@ export const DiligenceInput = () => {
       </div>
 
       <div className="mt-6 border border-vc-border bg-vc-hover/70 px-4 py-4">
-        <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.2em] text-vc-secondary">
+        <div className="flex items-center justify-between text-xs font-mono uppercase tracking-[0.2em] text-vc-secondary">
           <span>Status</span>
           <span className="text-vc-primary">{statusStage}</span>
         </div>
@@ -232,7 +232,7 @@ export const DiligenceInput = () => {
       {confirmState?.visible ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-6">
           <div className="w-full max-w-md border border-vc-border bg-white p-6 shadow-[0_20px_60px_rgba(0,0,0,0.2)]">
-            <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-vc-secondary">
+            <div className="text-xs font-mono uppercase tracking-[0.2em] text-vc-secondary">
               Existing Report
             </div>
             <h2 className="mt-3 text-lg font-semibold text-vc-primary">

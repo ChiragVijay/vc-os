@@ -1,4 +1,4 @@
-import { PRE_DEAL_TOOLS, POST_DEAL_TOOLS } from "@/src/lib/homeData";
+import { PRE_DEAL_TOOLS, FOUNDER_TOOLS, POST_DEAL_TOOLS } from "@/src/lib/homeData";
 import { DirectoryRow } from "./DirectoryRow";
 
 interface HomeProps {
@@ -18,7 +18,7 @@ export const Home: React.FC<HomeProps> = ({ onEnterApp, onSelectTool }) => {
       </header>
 
       {/* Main Content Area */}
-      <main className="px-6 pt-24 pb-32 max-w-5xl mx-auto">
+      <main className="px-6 pt-24 pb-32 max-w-7xl mx-auto">
         {/* Minimal Hero Text */}
         <div className="mb-8">
           <h1 className="text-2xl md:text-3xl font-serif font-light leading-[1.2] mb-3">
@@ -57,6 +57,18 @@ export const Home: React.FC<HomeProps> = ({ onEnterApp, onSelectTool }) => {
           </div>
           <div className="border-t border-vc-border">
             {POST_DEAL_TOOLS.map((tool) => (
+              <DirectoryRow key={tool.id} {...tool} onClick={() => onSelectTool?.(tool.id)} />
+            ))}
+          </div>
+
+          {/* Phase 3 Group */}
+          <div className="pt-12 pb-4">
+            <span className="font-mono text-xs tracking-tight text-vc-secondary uppercase tracking-wider">
+              Phase_03: Founder Tools
+            </span>
+          </div>
+          <div className="border-t border-vc-border">
+            {FOUNDER_TOOLS.map((tool) => (
               <DirectoryRow key={tool.id} {...tool} onClick={() => onSelectTool?.(tool.id)} />
             ))}
           </div>

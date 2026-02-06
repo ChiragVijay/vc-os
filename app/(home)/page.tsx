@@ -13,6 +13,9 @@ export default function HomePage() {
         if (toolId === "01") {
           router.push("/diligence");
         }
+        if (toolId === "02") {
+          router.push("/dashboard");
+        }
       }}
     />
   );

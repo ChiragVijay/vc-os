@@ -85,7 +85,7 @@ export const DiligenceHistory = () => {
     <div className="mt-16">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-vc-secondary">
+          <div className="text-xs font-mono uppercase tracking-[0.2em] text-vc-secondary">
             Recent Reports
           </div>
           <p className="text-sm text-vc-tertiary mt-2">
@@ -101,7 +101,7 @@ export const DiligenceHistory = () => {
       </div>
 
       <div className="mt-6 border border-vc-border">
-        <div className="grid grid-cols-12 gap-4 border-b border-vc-border px-4 py-3 text-[11px] font-mono uppercase tracking-[0.2em] text-vc-secondary">
+        <div className="grid grid-cols-12 gap-4 border-b border-vc-border px-4 py-3 text-xs font-mono uppercase tracking-[0.2em] text-vc-secondary">
           <div className="col-span-7">Company</div>
           <div className="col-span-3">Time</div>
           <div className="col-span-2">Status</div>

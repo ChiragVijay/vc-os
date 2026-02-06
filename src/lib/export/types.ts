@@ -40,7 +40,7 @@ export interface Exporter {
   export(doc: ExportDocument): Promise<ExportArtifact>;
 }
 
-export type ExportKind = "diligenceReport";
+export type ExportKind = "diligenceReport" | "companyReport";
 
 export interface Exportable<TPayload> {
   kind: ExportKind;

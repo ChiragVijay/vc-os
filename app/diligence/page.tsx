@@ -5,9 +5,9 @@ import { DiligenceInput } from "@/src/components/diligence/DiligenceInput";
 
 export default function DiligencePage() {
   return (
-    <div className="mx-auto max-w-5xl px-6 py-16">
+    <div className="mx-auto max-w-7xl px-6 py-16">
       <header className="border-b border-vc-border pb-10">
-        <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-vc-secondary">
+        <div className="text-xs font-mono uppercase tracking-[0.2em] text-vc-secondary">
           Diligence Agent
         </div>
         <h1 className="mt-4 text-3xl md:text-4xl font-serif font-light">

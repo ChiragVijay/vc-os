@@ -19,7 +19,19 @@ export default function DiligenceLayout({ children }: { children: React.ReactNod
             href="/diligence"
             className="hover:text-accent transition-colors underline underline-offset-4"
           >
-            Diligence Agent
+            Diligence
+          </Link>
+          <Link
+            href="/dashboard"
+            className="hover:text-accent transition-colors underline underline-offset-4"
+          >
+            Dashboard
+          </Link>
+          <Link
+            href="/founder"
+            className="hover:text-accent transition-colors underline underline-offset-4"
+          >
+            Founder
           </Link>
         </div>
       </header>

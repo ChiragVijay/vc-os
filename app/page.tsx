@@ -16,6 +16,12 @@ export default function VCOS() {
           if (toolId === "01") {
             router.push("/diligence");
           }
+          if (toolId === "02") {
+            router.push("/dashboard");
+          }
+          if (toolId === "03") {
+            router.push("/founder");
+          }
         }}
       />
     );
