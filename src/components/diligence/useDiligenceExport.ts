@@ -18,7 +18,6 @@ type SourceInfo = {
 type ReportDetails = {
   id: string;
   status: string;
-  score?: number | null;
   sourcesUsed?: string[];
   createdAt?: string;
   completedAt?: string | null;
@@ -41,7 +40,6 @@ export const useDiligenceExport = (report: ReportDetails): ExportOption[] => {
       company: report.company,
       report: report.report as DiligenceExportPayload["report"],
       sources: report.sources,
-      score: report.score,
       createdAt: report.createdAt,
     };
 

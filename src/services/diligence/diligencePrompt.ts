@@ -160,8 +160,8 @@ CONCISENESS RULES:
 
 CRITICAL INSTRUCTION:
 For every key finding or risk, attempt to analyze:
-1. First-order effect: The immediate consequence.
-2. Second-order effect: The market reaction or competitor response.
-3. Third-order effect: The long-term structural shift or macro outcome.`;
+1. The immediate consequence.
+2. The market reaction or competitor response.
+3. The long-term structural shift or macro outcome.`;
 
 const CONFIDENCE_SCORE_GUIDE = "";

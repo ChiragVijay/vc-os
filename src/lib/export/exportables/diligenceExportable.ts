@@ -1,5 +1,5 @@
 import type { Exportable, ExportDocument, ExportBlock, ExportInline, ExportSource } from "../types";
-import { slugify, getDateStamp } from "../utils/filenames";
+import { slugify } from "../utils/filenames";
 
 type CitedText = {
   text: string;
@@ -39,7 +39,6 @@ type DiligenceReportData = {
     concerns?: (string | CitedText)[];
   };
   aiConfidenceScore?: {
-    score?: number;
     reasoning?: string;
   };
 };
@@ -58,7 +57,6 @@ export type DiligenceExportPayload = {
   company?: { name?: string; url?: string } | null;
   report?: DiligenceReportData | null;
   sources?: SourceInfo[];
-  score?: number | null;
   createdAt?: string;
 };
 
@@ -104,23 +102,17 @@ export const diligenceExportable: Exportable<DiligenceExportPayload> = {
   kind: "diligenceReport",
 
   buildDocument(payload: DiligenceExportPayload): ExportDocument {
-    const { company, report, sources, score, createdAt } = payload;
+    const { company, report, sources, createdAt } = payload;
     const data = report ?? {};
 
     const companyName = company?.name ?? "Company";
     const blocks: ExportBlock[] = [];
 
-    if (data.aiConfidenceScore && data.aiConfidenceScore.reasoning) {
-      blocks.push({
-        type: "heading",
-        level: 2,
-        text: "Strategic Implications",
-      });
-      blocks.push({
-        type: "paragraph",
-        content: { text: data.aiConfidenceScore.reasoning },
-      });
-      blocks.push({ type: "divider" });
+    if (data.investmentThesis) {
+      blocks.push({ type: "heading", level: 2, text: "Investment Thesis" });
+      addParagraphSection(blocks, "Summary", data.investmentThesis.summary);
+      addSection(blocks, "Upside Case", data.investmentThesis.upside);
+      addSection(blocks, "Critical Concerns", data.investmentThesis.concerns);
     }
 
     if (data.executiveSummary) {
@@ -136,13 +128,6 @@ export const diligenceExportable: Exportable<DiligenceExportPayload> = {
       addParagraphSection(blocks, "Market Growth", data.marketAnalysis.marketGrowth);
       addSection(blocks, "Customer Segments", data.marketAnalysis.customerSegments);
       addSection(blocks, "Competitive Landscape", data.marketAnalysis.competition);
-    }
-
-    if (data.investmentThesis) {
-      blocks.push({ type: "heading", level: 2, text: "Investment Thesis" });
-      addParagraphSection(blocks, "Summary", data.investmentThesis.summary);
-      addSection(blocks, "Upside Case", data.investmentThesis.upside);
-      addSection(blocks, "Critical Concerns", data.investmentThesis.concerns);
     }
 
     if (data.swotAnalysis) {

@@ -238,14 +238,6 @@ export default function DiligencePrintPage() {
           </p>
         )}
 
-        {data.aiConfidenceScore?.reasoning && (
-          <div className="mt-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Strategic Implications</h3>
-            <p className="text-sm text-gray-800 leading-relaxed max-w-3xl">
-              {data.aiConfidenceScore.reasoning}
-            </p>
-          </div>
-        )}
       </header>
 
       {/* Executive Summary */}

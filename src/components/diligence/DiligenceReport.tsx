@@ -169,48 +169,35 @@ export const DiligenceReport = ({ report }: { report: ReportDetails }) => {
             </a>
           </div>
 
-          {/* Risk vs Reward Synthesis */}
-          <div className="mt-12">
-            <div className="p-8 border border-vc-border bg-vc-hover/30">
-              <div className="flex flex-col md:flex-row gap-8">
-                <div className="md:w-1/3">
-                  <p className="text-[11px] font-mono uppercase tracking-[0.2em] text-vc-secondary mb-3">
-                    Risk vs. Reward Synthesis
-                  </p>
-                  <h3 className="text-2xl font-serif text-vc-primary">Strategic Implications</h3>
+          {/* Investment Thesis - Primary */}
+          {data.investmentThesis?.summary && (
+            <div className="mt-12">
+              <div className="p-10 border-2 border-vc-primary bg-gradient-to-br from-white to-vc-hover/20">
+                <div className="flex items-start gap-3 mb-4">
+                  <span className="text-xs font-mono uppercase tracking-[0.2em] text-vc-primary border border-vc-primary px-2 py-1">
+                    Investment Thesis
+                  </span>
+                  <span
+                    className={`text-xs font-mono uppercase tracking-[0.2em] px-2 py-1 ${
+                      data.socialSentiment?.overallSentiment?.toLowerCase().includes("positive")
+                        ? "border-emerald-600 text-emerald-600"
+                        : data.socialSentiment?.overallSentiment?.toLowerCase().includes("negative")
+                          ? "border-rose-600 text-rose-600"
+                          : "border-amber-600 text-amber-600"
+                    } border`}
+                  >
+                    {data.socialSentiment?.overallSentiment ?? "Unknown"} Sentiment
+                  </span>
                 </div>
-                <div className="md:w-2/3 border-l border-vc-border pl-8">
-                  {data.aiConfidenceScore?.reasoning ? (
-                    <p className="text-lg leading-relaxed text-vc-primary font-light">
-                      {data.aiConfidenceScore.reasoning}
-                    </p>
-                  ) : (
-                    <span className="text-vc-secondary italic">Analysis pending...</span>
-                  )}
-                </div>
+                <CitedContent
+                  content={data.investmentThesis.summary}
+                  sourceMap={sourceMap}
+                  as="div"
+                  className="text-xl md:text-2xl leading-relaxed text-vc-primary font-light"
+                />
               </div>
             </div>
-          </div>
-
-          <div className="mt-6 p-8 border border-vc-border bg-vc-hover/30">
-            <p className="text-[11px] font-mono uppercase tracking-[0.2em] text-vc-secondary mb-3">
-              Market Sentiment
-            </p>
-            <p
-              className={`text-3xl font-serif font-medium capitalize ${
-                data.socialSentiment?.overallSentiment?.toLowerCase().includes("positive")
-                  ? "text-emerald-600"
-                  : data.socialSentiment?.overallSentiment?.toLowerCase().includes("negative")
-                    ? "text-rose-600"
-                    : "text-amber-600"
-              }`}
-            >
-              {data.socialSentiment?.overallSentiment ?? "Pending"}
-            </p>
-            <p className="mt-2 text-xs text-vc-secondary">
-              Based on social signals and community feedback
-            </p>
-          </div>
+          )}
         </header>
 
         <div className="space-y-24">
@@ -451,7 +438,7 @@ export const DiligenceReport = ({ report }: { report: ReportDetails }) => {
                     Community Pulse
                   </p>
                   <p className="text-lg leading-relaxed text-vc-primary font-light italic">
-                    "{data.socialSentiment.communityPulse}"
+                    {data.socialSentiment.communityPulse}
                   </p>
                 </div>
               )}
