@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   ResponsiveContainer,
   BarChart,
@@ -19,6 +19,7 @@ import {
 import type { FounderProfile } from "@/src/lib/founder";
 import { BenchmarkBar } from "@/src/components/dashboard/BenchmarkBar";
 import { formatCurrency } from "@/src/lib/dashboard";
+import { formatMetricValue } from "@/src/lib/format";
 import { useRouter } from "next/navigation";
 
 const COHORT_OPTIONS: { label: string; filter: CohortFilter; getValue?: (p: FounderProfile) => string }[] = [
@@ -29,11 +30,7 @@ const COHORT_OPTIONS: { label: string; filter: CohortFilter; getValue?: (p: Foun
 ];
 
 function formatBenchmarkValue(value: number, unit: string): string {
-  if (unit === "$") return formatCurrency(value, true);
-  if (unit === "%") return `${value.toFixed(1)}%`;
-  if (unit === "x") return `${value.toFixed(1)}x`;
-  if (unit === "mo") return `${value.toFixed(0)}mo`;
-  return value.toLocaleString();
+  return formatMetricValue(value, unit, formatCurrency);
 }
 
 export const FounderBenchmarks = () => {
@@ -59,8 +56,13 @@ export const FounderBenchmarks = () => {
     return getDistribution(profile.snapshots, selectedMetric, opt.filter, filterValue);
   }, [profile, cohortIdx, selectedMetric]);
 
+  useEffect(() => {
+    if (!profile) {
+      router.push("/founder");
+    }
+  }, [profile, router]);
+
   if (!profile) {
-    if (typeof window !== "undefined") router.push("/founder");
     return null;
   }
 

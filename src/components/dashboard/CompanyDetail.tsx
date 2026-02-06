@@ -24,8 +24,8 @@ import { MetricChart } from "./MetricChart";
 import { BenchmarkBar } from "./BenchmarkBar";
 import { HealthBadge } from "./HealthBadge";
 import { ExportButton, downloadBlob, defaultExportIcons } from "@/src/components/export/ExportButton";
-import { exportService, dashboardExportable } from "@/src/lib/export";
-import type { Exportable, ExportKind } from "@/src/lib/export/types";
+import { exportService } from "@/src/lib/export";
+import type { ExportKind } from "@/src/lib/export/types";
 import { ArrowLeft } from "lucide-react";
 
 interface CompanyDetailProps {
@@ -36,10 +36,7 @@ export const CompanyDetail = ({ companyId }: CompanyDetailProps) => {
   const company = getCompany(companyId);
   const snapshots = useMemo(() => getSnapshots(companyId), [companyId]);
 
-  // Register the exportable
-  useMemo(() => {
-    exportService.registerExportable(dashboardExportable as Exportable<unknown>);
-  }, []);
+
   const latest = useMemo(() => latestSnapshot(snapshots), [snapshots]);
   const prev = useMemo(() => previousSnapshot(snapshots), [snapshots]);
 

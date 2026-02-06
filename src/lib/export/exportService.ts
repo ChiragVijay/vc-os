@@ -1,5 +1,7 @@
 import type { Exporter, Exportable, ExportKind, ExportFormat, ExportArtifact } from "./types";
 import { markdownExporter } from "./exporters/markdownExporter";
+import { dashboardExportable } from "./exportables/dashboardExportable";
+import { diligenceExportable } from "./exportables/diligenceExportable";
 
 type ExportableRegistry = {
   [K in ExportKind]?: Exportable<unknown>;
@@ -13,12 +15,17 @@ const defaultExporters: ExporterRegistry = {
   markdown: markdownExporter,
 };
 
+const defaultExportables: ExportableRegistry = {
+  companyReport: dashboardExportable as Exportable<unknown>,
+  diligenceReport: diligenceExportable as Exportable<unknown>,
+};
+
 export class ExportService {
   private exportables: ExportableRegistry;
   private exporters: ExporterRegistry;
 
   constructor(
-    exportables: ExportableRegistry = {},
+    exportables: ExportableRegistry = defaultExportables,
     exporters: ExporterRegistry = defaultExporters,
   ) {
     this.exportables = exportables;

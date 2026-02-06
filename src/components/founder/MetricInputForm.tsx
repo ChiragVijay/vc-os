@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowLeft, Plus, Trash2, Save } from "lucide-react";
 import type { FounderProfile, FounderCompany, FounderMonthlyMetrics } from "@/src/lib/founder";
+import { SECTOR_OPTIONS, BATCH_OPTIONS, STAGE_OPTIONS, SELECT_CLASS, INPUT_CLASS } from "@/src/lib/constants";
 
 interface MetricInputFormProps {
   existingProfile?: FounderProfile | null;
@@ -10,9 +11,9 @@ interface MetricInputFormProps {
   onCancel: () => void;
 }
 
-const SECTORS = ["SaaS", "Fintech", "Health", "Dev Tools", "Marketplace", "AI/ML"] as const;
-const BATCHES = ["W25", "S25", "W26", "S26"] as const;
-const STAGES = ["Pre-Seed", "Seed", "Series A"] as const;
+const SECTORS = SECTOR_OPTIONS.filter((s) => s.value !== "all").map((s) => s.value);
+const BATCHES = BATCH_OPTIONS.filter((b) => b.value !== "all").map((b) => b.value);
+const STAGES = STAGE_OPTIONS.filter((s) => s.value !== "all").map((s) => s.value);
 
 function generateMonthOptions(): string[] {
   const months: string[] = [];
@@ -70,10 +71,8 @@ export const MetricInputForm = ({
 
   const [errors, setErrors] = useState<string[]>([]);
 
-  const selectClass =
-    "w-full border border-vc-border bg-white px-3 py-2 text-xs font-mono tracking-tight text-vc-primary focus:outline-none focus:ring-2 focus:ring-accent/40 appearance-none";
-  const inputClass =
-    "w-full border border-vc-border bg-white px-3 py-2 text-xs font-mono tracking-tight text-vc-primary placeholder:text-vc-secondary focus:outline-none focus:ring-2 focus:ring-accent/40";
+  const selectClass = SELECT_CLASS;
+  const inputClass = INPUT_CLASS;
 
   // ─── Step 1: Company Info ─────────────────────────────
 

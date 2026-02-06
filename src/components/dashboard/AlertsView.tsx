@@ -1,9 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useCompanyFilter } from "@/src/hooks/useCompanyFilter";
 import {
-  getCompanies,
   getSnapshots,
   generateAllAlerts,
 } from "@/src/lib/dashboard";
@@ -32,26 +32,9 @@ const alertTypeConfig: Record<
 };
 
 export const AlertsView = () => {
-  const searchParams = useSearchParams();
+  const { filtered } = useCompanyFilter();
   const router = useRouter();
   const [typeFilter, setTypeFilter] = useState<AlertType | "all">("all");
-
-  const batch = searchParams.get("batch") ?? "all";
-  const sector = searchParams.get("sector") ?? "all";
-  const stage = searchParams.get("stage") ?? "all";
-  const search = searchParams.get("q") ?? "";
-
-  const allCompanies = getCompanies();
-
-  const filtered = useMemo(() => {
-    return allCompanies.filter((c) => {
-      if (batch !== "all" && c.batch !== batch) return false;
-      if (sector !== "all" && c.sector !== sector) return false;
-      if (stage !== "all" && c.stage !== stage) return false;
-      if (search && !c.name.toLowerCase().includes(search.toLowerCase())) return false;
-      return true;
-    });
-  }, [allCompanies, batch, sector, stage, search]);
 
   const companyMap = useMemo(() => {
     const map = new Map<string, Company>();

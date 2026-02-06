@@ -1,9 +1,8 @@
 "use client";
 
 import { useMemo } from "react";
-import { useSearchParams } from "next/navigation";
+import { useCompanyFilter } from "@/src/hooks/useCompanyFilter";
 import {
-  getCompanies,
   getSnapshots,
   getBatches,
   latestSnapshot,
@@ -23,21 +22,9 @@ const batchColors: Record<BatchId, string> = {
 };
 
 export const CohortAnalysis = () => {
-  const searchParams = useSearchParams();
-  const sectorFilter = searchParams.get("sector") ?? "all";
-  const stageFilter = searchParams.get("stage") ?? "all";
+  const { filtered } = useCompanyFilter();
 
-  const allCompanies = getCompanies();
   const batches = getBatches();
-
-  // Filter companies
-  const filtered = useMemo(() => {
-    return allCompanies.filter((c) => {
-      if (sectorFilter !== "all" && c.sector !== sectorFilter) return false;
-      if (stageFilter !== "all" && c.stage !== stageFilter) return false;
-      return true;
-    });
-  }, [allCompanies, sectorFilter, stageFilter]);
 
   // Batch summaries
   const batchSummaries = useMemo(() => {

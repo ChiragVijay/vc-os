@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { FileText, Check, X, AlertTriangle } from "lucide-react";
 import {
   loadFounderProfile,
@@ -44,8 +44,13 @@ export const ScorecardView = () => {
     [profile]
   );
 
+  useEffect(() => {
+    if (!profile) {
+      router.push("/founder");
+    }
+  }, [profile, router]);
+
   if (!profile || !health || !readiness) {
-    if (typeof window !== "undefined" && !profile) router.push("/founder");
     return null;
   }
 

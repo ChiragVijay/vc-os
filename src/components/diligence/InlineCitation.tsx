@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 
+import { getDomain, getTypeLabel } from "@/src/lib/diligence/sourceUtils";
+
 export type SourceInfo = {
   id: string;
   url: string;
@@ -14,26 +16,6 @@ export type SourceInfo = {
 type InlineCitationProps = {
   ordinal: number;
   source: SourceInfo;
-};
-
-const getDomain = (url: string): string => {
-  try {
-    return new URL(url).hostname.replace(/^www\./, "");
-  } catch {
-    return url;
-  }
-};
-
-const getTypeLabel = (type: string): string => {
-  const labels: Record<string, string> = {
-    news: "News",
-    funding: "Funding",
-    competitor: "Competitor",
-    hn: "Hacker News",
-    reddit: "Reddit",
-    website: "Website",
-  };
-  return labels[type] ?? type;
 };
 
 export const InlineCitation = ({ ordinal, source }: InlineCitationProps) => {

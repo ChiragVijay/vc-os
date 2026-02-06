@@ -1,11 +1,10 @@
-"use client";
-
-import { useParams } from "next/navigation";
 import { CompanyDetail } from "@/src/components/dashboard/CompanyDetail";
 
-export default function CompanyPage() {
-  const params = useParams();
-  const companyId = params.companyId as string;
+type Props = {
+  params: Promise<{ companyId: string }>;
+};
 
+export default async function CompanyPage({ params }: Props) {
+  const { companyId } = await params;
   return <CompanyDetail companyId={companyId} />;
 }

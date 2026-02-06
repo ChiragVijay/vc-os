@@ -2,29 +2,10 @@
 
 import { useState } from "react";
 import type { SourceInfo } from "./InlineCitation";
+import { getDomain, getTypeLabel } from "@/src/lib/diligence/sourceUtils";
 
 type SourcesIndexProps = {
   sources: SourceInfo[];
-};
-
-const getDomain = (url: string): string => {
-  try {
-    return new URL(url).hostname.replace(/^www\./, "");
-  } catch {
-    return url;
-  }
-};
-
-const getTypeLabel = (type: string): string => {
-  const labels: Record<string, string> = {
-    news: "News",
-    funding: "Funding",
-    competitor: "Competitor",
-    hn: "Hacker News",
-    reddit: "Reddit",
-    website: "Website",
-  };
-  return labels[type] ?? type;
 };
 
 export const SourcesIndex = ({ sources }: SourcesIndexProps) => {

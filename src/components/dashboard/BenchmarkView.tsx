@@ -1,9 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useCompanyFilter } from "@/src/hooks/useCompanyFilter";
 import {
-  getCompanies,
   getSnapshots,
   benchmarkCompany,
   benchmarkMetrics,
@@ -13,29 +13,14 @@ import {
 import type { Company, MonthlySnapshot, BenchmarkResult } from "@/src/lib/dashboard/types";
 import { MetricCard } from "./MetricCard";
 import { BenchmarkBar } from "./BenchmarkBar";
+import { formatMetricValue } from "@/src/lib/format";
+import { SELECT_CLASS } from "@/src/lib/constants";
 
 export const BenchmarkView = () => {
-  const searchParams = useSearchParams();
+  const { filtered } = useCompanyFilter();
   const router = useRouter();
   const [selectedMetric, setSelectedMetric] = useState("mrrGrowth");
   const [cohortBy, setCohortBy] = useState<"batch" | "stage">("batch");
-
-  const batch = searchParams.get("batch") ?? "all";
-  const sector = searchParams.get("sector") ?? "all";
-  const stage = searchParams.get("stage") ?? "all";
-  const search = searchParams.get("q") ?? "";
-
-  const allCompanies = getCompanies();
-
-  const filtered = useMemo(() => {
-    return allCompanies.filter((c) => {
-      if (batch !== "all" && c.batch !== batch) return false;
-      if (sector !== "all" && c.sector !== sector) return false;
-      if (stage !== "all" && c.stage !== stage) return false;
-      if (search && !c.name.toLowerCase().includes(search.toLowerCase())) return false;
-      return true;
-    });
-  }, [allCompanies, batch, sector, stage, search]);
 
   // Build cohort snapshots map
   const cohortSnapshotsMap = useMemo(() => {
@@ -100,15 +85,8 @@ export const BenchmarkView = () => {
   }, [benchmarks]);
 
   function formatValue(v: number, unit: string) {
-    if (unit === "$") return formatCurrency(v, true);
-    if (unit === "%") return `${v.toFixed(1)}%`;
-    if (unit === "x") return `${v.toFixed(1)}x`;
-    if (unit === "mo") return `${v.toFixed(0)} mo`;
-    return v.toLocaleString();
+    return formatMetricValue(v, unit, formatCurrency);
   }
-
-  const selectClass =
-    "border border-vc-border bg-white px-3 py-2 text-xs font-mono tracking-tight text-vc-primary focus:outline-none focus:ring-2 focus:ring-accent/40 appearance-none cursor-pointer";
 
   return (
     <div className="px-6 py-8 max-w-7xl mx-auto">
@@ -127,7 +105,7 @@ export const BenchmarkView = () => {
         <select
           value={selectedMetric}
           onChange={(e) => setSelectedMetric(e.target.value)}
-          className={selectClass}
+          className={SELECT_CLASS}
         >
           {benchmarkMetrics.map((m) => (
             <option key={m.key} value={m.key}>
@@ -138,7 +116,7 @@ export const BenchmarkView = () => {
         <select
           value={cohortBy}
           onChange={(e) => setCohortBy(e.target.value as "batch" | "stage")}
-          className={selectClass}
+          className={SELECT_CLASS}
         >
           <option value="batch">By Batch</option>
           <option value="stage">By Stage</option>

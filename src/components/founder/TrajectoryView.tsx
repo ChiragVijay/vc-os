@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   ResponsiveContainer,
   AreaChart,
@@ -36,9 +36,11 @@ export const TrajectoryView = () => {
     return loadFounderProfile();
   });
 
-  if (!profile) {
-    if (typeof window !== "undefined") router.push("/founder");
-  }
+  useEffect(() => {
+    if (!profile) {
+      router.push("/founder");
+    }
+  }, [profile, router]);
 
   const projection = useMemo(
     () => (profile ? generateProjection(profile.snapshots, 6) : []),
