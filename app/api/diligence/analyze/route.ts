@@ -260,7 +260,7 @@ export const POST = async (request: Request) => {
             },
             completed_at: new Date().toISOString(),
             error: null,
-            sources_used: ["tavily", "brave", "hn", "reddit", "gemini"],
+            sources_used: ["tavily", "brave", "hn", /*"reddit",*/ "gemini"],
           })
           .eq("id", report.id);
 

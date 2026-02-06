@@ -180,6 +180,22 @@ export const DiligenceInput = () => {
 
   return (
     <div className="w-full">
+      <style jsx>{`
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        .spinner {
+          border: 2px solid transparent;
+          border-top-color: currentColor;
+          border-radius: 50%;
+          animation: spin 0.8s linear infinite;
+        }
+      `}</style>
       <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-3 md:items-center">
         <div className="flex-1 relative">
           <input
@@ -191,20 +207,23 @@ export const DiligenceInput = () => {
             disabled={status === "processing"}
           />
           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[11px] font-mono text-vc-secondary">
-            URL
+              URL
           </span>
         </div>
         <button
           type="submit"
           disabled={status === "processing"}
-          className="md:w-48 border border-vc-primary bg-vc-primary text-white text-xs font-mono tracking-[0.2em] uppercase py-3 transition-colors hover:bg-accent hover:border-accent disabled:opacity-60"
+          className="md:w-48 border border-vc-primary bg-vc-primary text-white text-xs font-mono tracking-[0.2em] uppercase py-3 transition-colors hover:bg-accent hover:border-accent disabled:opacity-60 flex items-center justify-center gap-2"
         >
-          {status === "processing" ? "Analyzing" : "Run Analysis"}
+          {status === "processing" && (
+            <span className="spinner w-3 h-3 text-white" />
+          )}
+          <span>{status === "processing" ? "Analyzing" : "Run Analysis"}</span>
         </button>
       </form>
 
       <div className="flex flex-wrap gap-3 text-xs uppercase font-mono tracking-[0.2em] text-vc-secondary mt-4">
-        <span>Reddit</span>
+        {/* <span>Reddit</span> */}
         <span>Hacker News</span>
         <span>Tavily</span>
         <span>Brave</span>
