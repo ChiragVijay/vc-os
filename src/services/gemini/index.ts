@@ -2,8 +2,8 @@ import { GoogleGenAI } from "@google/genai";
 import type { z } from "zod";
 
 const MODEL_FALLBACK_CHAIN = [
-  "gemini-3-flash-preview",
   "gemini-2.5-flash-lite",
+  "gemini-3-flash-preview",
   "gemini-2.5-flash",
   "gemini-2.0-flash-lite-001",
   "gemini-2.0-flash-001",
