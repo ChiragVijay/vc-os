@@ -101,7 +101,7 @@ export const DiligenceHistory = () => {
       </div>
 
       <div className="mt-6 border border-vc-border">
-        <div className="grid grid-cols-12 gap-4 border-b border-vc-border px-4 py-3 text-xs font-mono uppercase tracking-[0.2em] text-vc-secondary">
+        <div className="hidden md:grid grid-cols-12 gap-4 border-b border-vc-border px-4 py-3 text-xs font-mono uppercase tracking-[0.2em] text-vc-secondary">
           <div className="col-span-7">Company</div>
           <div className="col-span-3">Time</div>
           <div className="col-span-2">Status</div>
@@ -122,25 +122,29 @@ export const DiligenceHistory = () => {
             key={report.id}
             type="button"
             onClick={() => router.push(`/diligence/${report.id}`)}
-            className="grid grid-cols-12 gap-4 w-full text-left px-4 py-4 border-b border-vc-border hover:bg-vc-hover transition-colors"
+            className="flex flex-col gap-3 w-full text-left px-4 py-4 border-b border-vc-border hover:bg-vc-hover transition-colors md:grid md:grid-cols-12 md:gap-4"
           >
-            <div className="col-span-7 text-sm text-vc-primary">
+            <div className="md:col-span-7 text-sm text-vc-primary">
               {report.company?.name ?? "Unknown Company"}
               <div className="text-xs text-vc-secondary">{report.company?.url ?? ""}</div>
             </div>
-            <div className="col-span-3 text-xs text-vc-secondary">
-              {report.completedAt
-                ? new Date(report.completedAt).toLocaleString()
-                : report.createdAt
-                  ? new Date(report.createdAt).toLocaleString()
-                  : "-"}
+            <div className="md:col-span-3 text-xs text-vc-secondary">
+              <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-vc-secondary md:hidden">
+                Time
+              </div>
+              <div>
+                {report.completedAt
+                  ? new Date(report.completedAt).toLocaleString()
+                  : report.createdAt
+                    ? new Date(report.createdAt).toLocaleString()
+                    : "-"}
+              </div>
             </div>
-            <div
-              className={`col-span-2 text-xs uppercase tracking-[0.2em] font-mono ${statusTone(
-                report.status,
-              )}`}
-            >
-              {report.status}
+            <div className="md:col-span-2 text-xs font-mono uppercase tracking-[0.2em]">
+              <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-vc-secondary md:hidden">
+                Status
+              </div>
+              <div className={`${statusTone(report.status)}`}>{report.status}</div>
             </div>
           </button>
         ))}
