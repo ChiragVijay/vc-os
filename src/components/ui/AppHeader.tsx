@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/diligence", label: "Diligence" },
   { href: "/dashboard", label: "Dashboard" },
+  { href: "/cap-table", label: "Cap Table" },
   { href: "/founder", label: "Founder" },
 ] as const;
 
@@ -20,6 +21,7 @@ export function AppHeader({ showNav = true }: AppHeaderProps) {
   const getActiveSection = () => {
     if (pathname.startsWith("/dashboard")) return "/dashboard";
     if (pathname.startsWith("/diligence")) return "/diligence";
+    if (pathname.startsWith("/cap-table")) return "/cap-table";
     if (pathname.startsWith("/founder")) return "/founder";
     return "/";
   };

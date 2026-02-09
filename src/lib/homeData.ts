@@ -14,6 +14,11 @@ export const POST_DEAL_TOOLS: Tool[] = [
     name: "Portfolio Dashboard",
     desc: "Track portfolio KPIs, benchmark against cohorts, and flag companies needing attention.",
   },
+  {
+    id: "04",
+    name: "Cap Table",
+    desc: "Manage ownership, model funding rounds, and simulate exit waterfalls across the portfolio.",
+  },
 ];
 
 export const FOUNDER_TOOLS: Tool[] = [
