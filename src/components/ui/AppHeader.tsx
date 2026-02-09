@@ -29,16 +29,16 @@ export function AppHeader({ showNav = true }: AppHeaderProps) {
   const activeSection = getActiveSection();
 
   return (
-    <header className="px-6 py-6 flex justify-between items-baseline border-b border-vc-border">
+    <header className="px-4 py-4 md:px-6 md:py-6 flex justify-between items-baseline border-b border-vc-border">
       <Link
         href="/"
-        className="text-sm font-bold tracking-tight flex items-center gap-2"
+        className="text-xs md:text-sm font-bold tracking-tight flex items-center gap-1.5 md:gap-2"
       >
-        <span className="w-3 h-3 bg-accent" />
+        <span className="w-2.5 h-2.5 md:w-3 md:h-3 bg-accent" />
         VC_OS
       </Link>
       {showNav && (
-        <nav className="flex items-center gap-6 text-xs font-mono tracking-tight">
+        <nav className="flex items-center gap-2 md:gap-6 text-[10px] md:text-xs font-mono tracking-tight">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
